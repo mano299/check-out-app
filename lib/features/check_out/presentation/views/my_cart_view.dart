@@ -1,4 +1,5 @@
 import 'package:check_out_app/core/utils/styles.dart';
+import 'package:check_out_app/features/check_out/presentation/widget/my_cart_view_body.dart';
 import 'package:flutter/material.dart';
 
 class MyCartView extends StatelessWidget {
@@ -21,6 +22,7 @@ class MyCartView extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
         ),
       ),
+      body: MyCartViewBody(),
     );
   }
 }
