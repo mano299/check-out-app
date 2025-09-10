@@ -1,3 +1,4 @@
+import 'package:check_out_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class MyCartView extends StatelessWidget {
@@ -7,7 +8,10 @@ class MyCartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Cart'),
+        title: Text(
+          'My Cart',
+          style: Styles.styleMedium25,
+        ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {},
