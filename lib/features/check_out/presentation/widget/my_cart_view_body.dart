@@ -11,20 +11,31 @@ class MyCartViewBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          SizedBox(height: 18),
+          SizedBox(height: 25),
           Image.asset('assets/images/cart.png'),
           SizedBox(height: 25),
           OrderInfoItem(
             title: 'Order Subtotal',
             price: '42.97',
           ),
+          SizedBox(height: 3),
           OrderInfoItem(
             title: 'Discount',
             price: '0',
           ),
+          SizedBox(height: 3),
           OrderInfoItem(
             title: 'Shipping',
             price: '8',
+          ),
+          SizedBox(height: 2),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Divider(
+              thickness: 2,
+              color: Color(0xffC7C7C7),
+              height: 30,
+            ),
           ),
         ],
       ),
