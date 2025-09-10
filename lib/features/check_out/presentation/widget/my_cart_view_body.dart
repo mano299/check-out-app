@@ -1,3 +1,4 @@
+import 'package:check_out_app/features/check_out/presentation/widget/total_price.dart';
 import 'package:flutter/material.dart';
 
 import 'order_info_item.dart';
@@ -37,6 +38,7 @@ class MyCartViewBody extends StatelessWidget {
               height: 30,
             ),
           ),
+          TotalPrice(),
         ],
       ),
     );
