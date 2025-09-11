@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'payment_card.dart';
 import 'payment_methods_list_view.dart';
 
 class PaymentsDetailsViewBody extends StatelessWidget {
@@ -7,10 +8,13 @@ class PaymentsDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PaymentMethodsListView(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          PaymentMethodsListView(),
+          PaymentCard(),
+        ],
+      ),
     );
   }
 }
