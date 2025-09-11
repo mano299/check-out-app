@@ -1,4 +1,3 @@
-import 'package:check_out_app/features/check_out/presentation/widget/payment_method.dart';
 import 'package:flutter/material.dart';
 
 import 'payment_methods_list_view.dart';
