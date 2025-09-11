@@ -1,7 +1,7 @@
 import 'package:check_out_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar({required String title}) {
+AppBar buildAppBar({required String title, required BuildContext context}) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0,
@@ -11,7 +11,9 @@ AppBar buildAppBar({required String title}) {
     ),
     centerTitle: true,
     leading: IconButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pop(context);
+      },
       icon: Icon(Icons.arrow_back),
     ),
   );
