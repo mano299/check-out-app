@@ -1,4 +1,5 @@
 import 'package:check_out_app/core/utils/styles.dart';
+import 'package:check_out_app/features/check_out/presentation/widget/build_app_bar.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/my_cart_view_body.dart';
 import 'package:flutter/material.dart';
 
@@ -9,19 +10,7 @@ class MyCartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          'My Cart',
-          style: Styles.styleMedium25,
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.arrow_back),
-        ),
-      ),
+      appBar: buildAppBar(title: 'My Cart'),
       body: MyCartViewBody(),
     );
   }

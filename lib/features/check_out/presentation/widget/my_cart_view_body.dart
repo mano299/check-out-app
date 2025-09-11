@@ -1,3 +1,4 @@
+import 'package:check_out_app/features/check_out/presentation/views/payments_details_view.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/custom_button.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/total_price.dart';
 import 'package:flutter/material.dart';
