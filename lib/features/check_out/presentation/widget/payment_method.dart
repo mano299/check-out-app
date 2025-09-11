@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PaymentMethod extends StatelessWidget {
-  const PaymentMethod({super.key, required this.isAcitve});
+  const PaymentMethod({super.key, required this.isAcitve, required this.image});
   final bool isAcitve;
+  final String image;
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -27,7 +28,7 @@ class PaymentMethod extends StatelessWidget {
             : null,
       ),
       child: Center(
-        child: SvgPicture.asset('assets/images/mastercard.svg'),
+        child: SvgPicture.asset(image),
       ),
     );
   }
