@@ -8,7 +8,7 @@ class PaymentsDetailsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PaymentMethod(),
+        PaymentMethod(isAcitve: false),
       ],
     );
   }
