@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 AppBar buildAppBar({required String title, required BuildContext context}) {
   return AppBar(
+    scrolledUnderElevation: 0,
     backgroundColor: Colors.white,
     elevation: 0,
     title: Text(
