@@ -18,6 +18,27 @@ class ThankYouViewBody extends StatelessWidget {
               ),
             ),
             Positioned(
+              bottom: MediaQuery.sizeOf(context).height * .2 + 20,
+              left: 28,
+              right: 28,
+              child: Row(
+                children: List.generate(
+                  30,
+                  (index) => Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffB8B8B8),
+                        ),
+                        height: 2,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
               top: -50,
               right: 0,
               left: 0,
