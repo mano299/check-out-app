@@ -3,6 +3,8 @@ import 'package:check_out_app/features/check_out/presentation/widget/custom_card
 import 'package:check_out_app/features/check_out/presentation/widget/total_price.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_credit_card.dart';
+
 class ThankYouCard extends StatelessWidget {
   const ThankYouCard({
     super.key,
@@ -45,14 +47,14 @@ class ThankYouCard extends StatelessWidget {
               title: 'To',
               value: 'Sam Louis',
             ),
-            SizedBox(height: 30),
             Divider(
               color: Color(0xffC7C7C7),
               thickness: 2,
+              height: 60,
             ),
-            SizedBox(height: 24),
             TotalPrice(),
             SizedBox(height: 30),
+            CustomCreditCard()
           ],
         ),
       ),
