@@ -1,5 +1,6 @@
 import 'package:check_out_app/core/utils/styles.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/custom_card_info_item.dart';
+import 'package:check_out_app/features/check_out/presentation/widget/total_price.dart';
 import 'package:flutter/material.dart';
 
 class ThankYouCard extends StatelessWidget {
@@ -34,6 +35,24 @@ class ThankYouCard extends StatelessWidget {
               title: 'Date',
               value: '01/24/2023',
             ),
+            SizedBox(height: 20),
+            CustomCardInfoItem(
+              title: 'Time',
+              value: '10:15 AM',
+            ),
+            SizedBox(height: 20),
+            CustomCardInfoItem(
+              title: 'To',
+              value: 'Sam Louis',
+            ),
+            SizedBox(height: 30),
+            Divider(
+              color: Color(0xffC7C7C7),
+              thickness: 2,
+            ),
+            SizedBox(height: 24),
+            TotalPrice(),
+            SizedBox(height: 30),
           ],
         ),
       ),
