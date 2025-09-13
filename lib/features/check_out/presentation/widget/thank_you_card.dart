@@ -4,6 +4,7 @@ import 'package:check_out_app/features/check_out/presentation/widget/total_price
 import 'package:flutter/material.dart';
 
 import 'custom_credit_card.dart';
+import 'success_pay.dart';
 
 class ThankYouCard extends StatelessWidget {
   const ThankYouCard({
@@ -54,7 +55,10 @@ class ThankYouCard extends StatelessWidget {
             ),
             TotalPrice(),
             SizedBox(height: 30),
-            CustomCreditCard()
+            CustomCreditCard(),
+            Spacer(),
+            SuccessPay(),
+            SizedBox(height: (MediaQuery.sizeOf(context).height * .2 / 2) - 29)
           ],
         ),
       ),
