@@ -15,7 +15,7 @@ class ThankYouCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xffD9D9D9),
+        color: Color(0xffededed),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(

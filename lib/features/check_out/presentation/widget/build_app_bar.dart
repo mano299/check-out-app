@@ -1,13 +1,13 @@
 import 'package:check_out_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar({required String title, required BuildContext context}) {
+AppBar buildAppBar({String? title, required BuildContext context}) {
   return AppBar(
     scrolledUnderElevation: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.transparent,
     elevation: 0,
     title: Text(
-      title,
+      title ?? '',
       style: Styles.styleMedium25,
     ),
     centerTitle: true,
