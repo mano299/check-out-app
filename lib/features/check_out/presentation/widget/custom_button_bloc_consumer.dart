@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:check_out_app/features/check_out/presentation/manager/payment_cubit/payment_cubit.dart';
 import 'package:check_out_app/features/check_out/presentation/views/thank_you_view.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/custom_button.dart';
@@ -22,6 +24,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
                 builder: (context) => ThankYouView(),
               ));
         } else if (state is PaymentFailure) {
+          log(state.errMessage);
           SnackBar snackBar = SnackBar(content: Text(state.errMessage));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
