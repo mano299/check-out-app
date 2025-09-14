@@ -1,7 +1,6 @@
 import 'package:check_out_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomCardInfoItem extends StatelessWidget {
   const CustomCardInfoItem(
       {super.key, required this.title, required this.value});

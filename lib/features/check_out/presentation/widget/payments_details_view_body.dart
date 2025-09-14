@@ -39,10 +39,11 @@ class _PaymentsDetailsViewBodyState extends State<PaymentsDetailsViewBody> {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ThankYouView(),
-                        ),);
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ThankYouView(),
+                      ),
+                    );
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
