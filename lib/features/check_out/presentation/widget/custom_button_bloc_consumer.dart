@@ -91,6 +91,9 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         },
         onError: (error) {
           print("onError: $error");
+          SnackBar snackBar = SnackBar(content: Text(error));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.pop(context);
           Navigator.pop(context);
         },
         onCancel: () {
