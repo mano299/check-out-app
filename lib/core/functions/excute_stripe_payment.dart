@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void excuteStripePayment(BuildContext context) {
-    PaymentIntentInputModel paymentIntentInputModel =
-        PaymentIntentInputModel(
-      amount: '100',
-      currency: 'USD',
-      customerID: ApiKeys.customerID,
-    );
-    BlocProvider.of<PaymentCubit>(context).makePayment(
-        paymentIntentInputModel: paymentIntentInputModel);
-  }
+  PaymentIntentInputModel paymentIntentInputModel = PaymentIntentInputModel(
+    amount: '50',
+    currency: 'USD',
+    customerID: ApiKeys.customerID,
+  );
+  BlocProvider.of<PaymentCubit>(context)
+      .makePayment(paymentIntentInputModel: paymentIntentInputModel);
+}
