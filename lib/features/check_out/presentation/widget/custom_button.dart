@@ -33,7 +33,9 @@ class CustomButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 67.0, vertical: 23),
         child: isLoading
-            ? CircularProgressIndicator()
+            ? CircularProgressIndicator(
+                color: Colors.blueAccent,
+              )
             : Text(
                 textAlign: TextAlign.center,
                 text,
