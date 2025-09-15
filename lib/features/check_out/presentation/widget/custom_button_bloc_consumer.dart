@@ -1,18 +1,14 @@
 import 'dart:developer';
 
-import 'package:check_out_app/core/utils/api_keys.dart';
-import 'package:check_out_app/features/check_out/data/models/amount_model/amount_model.dart';
-import 'package:check_out_app/features/check_out/data/models/amount_model/details.dart';
-import 'package:check_out_app/features/check_out/data/models/orders_model/item.dart';
-import 'package:check_out_app/features/check_out/data/models/orders_model/orders_model.dart';
+import 'package:check_out_app/core/functions/excute_stripe_payment.dart';
 import 'package:check_out_app/features/check_out/presentation/manager/payment_cubit/payment_cubit.dart';
 import 'package:check_out_app/features/check_out/presentation/views/thank_you_view.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 
-import '../../data/models/payment_intent_input_model.dart';
+import '../../../../core/functions/excute_paypal_payment.dart';
+import '../../../../core/functions/get_transaction_data.dart';
 
 class CustomButtonBlocConsumer extends StatelessWidget {
   const CustomButtonBlocConsumer({
@@ -44,14 +40,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
               var tranactionData = getTransactionsData();
               excutePayPalPayment(context, tranactionData);
             } else {
-              PaymentIntentInputModel paymentIntentInputModel =
-                  PaymentIntentInputModel(
-                amount: '100',
-                currency: 'USD',
-                customerID: ApiKeys.customerID,
-              );
-              BlocProvider.of<PaymentCubit>(context).makePayment(
-                  paymentIntentInputModel: paymentIntentInputModel);
+              excuteStripePayment(context);
             }
           },
           isLoading: state is PaymentLoading ? true : false,
@@ -60,70 +49,5 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         );
       },
     );
-  }
-
-  void excutePayPalPayment(BuildContext context,
-      ({AmountModel amount, OrdersModel ordersList}) tranactionData) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (BuildContext context) => PaypalCheckoutView(
-        sandboxMode: true,
-        clientId: ApiKeys.clientId,
-        secretKey: ApiKeys.paypalSecretId,
-        transactions: [
-          {
-            "amount": tranactionData.amount.toJson(),
-            "description": "The payment transaction description.",
-            "item_list": tranactionData.ordersList.toJson(),
-          }
-        ],
-        note: "Contact us for any questions on your order.",
-        onSuccess: (Map params) async {
-          print("onSuccess: $params");
-          Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (context) => ThankYouView()),
-              (route) {
-            if (route.settings.name == '/') {
-              return true;
-            } else {
-              return false;
-            }
-          });
-        },
-        onError: (error) {
-          print("onError: $error");
-          SnackBar snackBar = SnackBar(content: Text(error));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          Navigator.pop(context);
-          Navigator.pop(context);
-        },
-        onCancel: () {
-          print('cancelled:');
-        },
-      ),
-    ));
-  }
-
-  ({AmountModel amount, OrdersModel ordersList}) getTransactionsData() {
-    var amountModel = AmountModel(
-      total: "70",
-      currency: "USD",
-      details: Details(shipping: "0", shippingDiscount: 0, subtotal: "70"),
-    );
-    List<Order> orders = [
-      Order(
-        name: "Apple",
-        currency: "USD",
-        quantity: 4,
-        price: "5",
-      ),
-      Order(
-        name: "Pineapple",
-        currency: "USD",
-        quantity: 5,
-        price: "10",
-      ),
-    ];
-    var ordersList = OrdersModel(orders: orders);
-    return (amount: amountModel, ordersList: ordersList);
   }
 }

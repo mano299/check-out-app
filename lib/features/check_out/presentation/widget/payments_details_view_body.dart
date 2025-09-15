@@ -3,7 +3,6 @@ import 'package:check_out_app/features/check_out/presentation/widget/custom_butt
 import 'package:flutter/material.dart';
 
 import 'payment_card.dart';
-import 'payment_methods_list_view.dart';
 
 class PaymentsDetailsViewBody extends StatefulWidget {
   const PaymentsDetailsViewBody({super.key});
