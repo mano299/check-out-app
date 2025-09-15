@@ -21,7 +21,7 @@ class _PaymentsDetailsViewBodyState extends State<PaymentsDetailsViewBody> {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: 16)),
-        SliverToBoxAdapter(child: PaymentMethodsListView()),
+        // SliverToBoxAdapter(child: PaymentMethodsListView()),
         SliverToBoxAdapter(
           child: PaymentCard(
             formKey: formKey,

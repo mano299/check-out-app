@@ -17,37 +17,42 @@ import '../../data/models/payment_intent_input_model.dart';
 class CustomButtonBlocConsumer extends StatelessWidget {
   const CustomButtonBlocConsumer({
     super.key,
+    required this.isPaypal,
   });
+  final bool isPaypal;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PaymentCubit, PaymentState>(
       listener: (context, state) {
-        // if (state is PaymentSuccess) {
-        //   Navigator.pushReplacement(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => ThankYouView(),
-        //       ));
-        // } else if (state is PaymentFailure) {
-        //   log(state.errMessage);
-        //   SnackBar snackBar = SnackBar(content: Text(state.errMessage));
-        //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        // }
-        var tranactionData = getTransactionsData();
-        excutePayPalPayment(context, tranactionData);
+        if (state is PaymentSuccess) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ThankYouView(),
+              ));
+        } else if (state is PaymentFailure) {
+          log(state.errMessage);
+          SnackBar snackBar = SnackBar(content: Text(state.errMessage));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       },
       builder: (context, state) {
         return CustomButton(
           onPressed: () {
-            PaymentIntentInputModel paymentIntentInputModel =
-                PaymentIntentInputModel(
-              amount: '100',
-              currency: 'USD',
-              customerID: ApiKeys.customerID,
-            );
-            BlocProvider.of<PaymentCubit>(context)
-                .makePayment(paymentIntentInputModel: paymentIntentInputModel);
+            if (isPaypal) {
+              var tranactionData = getTransactionsData();
+              excutePayPalPayment(context, tranactionData);
+            } else {
+              PaymentIntentInputModel paymentIntentInputModel =
+                  PaymentIntentInputModel(
+                amount: '100',
+                currency: 'USD',
+                customerID: ApiKeys.customerID,
+              );
+              BlocProvider.of<PaymentCubit>(context).makePayment(
+                  paymentIntentInputModel: paymentIntentInputModel);
+            }
           },
           isLoading: state is PaymentLoading ? true : false,
           text: 'Select',
@@ -74,6 +79,12 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
           print("onSuccess: $params");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ThankYouView(),
+            ),
+          );
         },
         onError: (error) {
           print("onError: $error");
