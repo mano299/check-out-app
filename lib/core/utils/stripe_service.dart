@@ -58,7 +58,10 @@ class StripeService {
         'customer': customerID,
       },
       token: ApiKeys.secretKey,
-      headers: {"Authorization": "Bearer ${ApiKeys.secretKey}", 'Stripe-Version': '2025-08-27.basil'},
+      headers: {
+        "Authorization": "Bearer ${ApiKeys.secretKey}",
+        'Stripe-Version': '2025-08-27.basil'
+      },
     );
     var ephemeralKeyModel = EphemeralKeyModel.fromJson(response.data);
     return ephemeralKeyModel;
