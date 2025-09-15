@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:check_out_app/core/utils/api_keys.dart';
 import 'package:check_out_app/features/check_out/presentation/manager/payment_cubit/payment_cubit.dart';
 import 'package:check_out_app/features/check_out/presentation/views/thank_you_view.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/custom_button.dart';
@@ -33,7 +34,11 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         return CustomButton(
           onPressed: () {
             PaymentIntentInputModel paymentIntentInputModel =
-                PaymentIntentInputModel(amount: '100', currency: 'USD');
+                PaymentIntentInputModel(
+              amount: '100',
+              currency: 'USD',
+              customerID: ApiKeys.customerID,
+            );
             BlocProvider.of<PaymentCubit>(context)
                 .makePayment(paymentIntentInputModel: paymentIntentInputModel);
           },
