@@ -62,19 +62,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
                       "price": "10",
                       "currency": "USD"
                     }
-                  ],
-
-                  // shipping address is not required though
-                  //   "shipping_address": {
-                  //     "recipient_name": "tharwat",
-                  //     "line1": "Alexandria",
-                  //     "line2": "",
-                  //     "city": "Alexandria",
-                  //     "country_code": "EG",
-                  //     "postal_code": "21505",
-                  //     "phone": "+00000000",
-                  //     "state": "Alexandria"
-                  //  },
+                  ]
                 }
               }
             ],
