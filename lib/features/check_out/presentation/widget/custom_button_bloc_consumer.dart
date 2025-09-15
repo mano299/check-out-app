@@ -1,6 +1,10 @@
 import 'dart:developer';
 
 import 'package:check_out_app/core/utils/api_keys.dart';
+import 'package:check_out_app/features/check_out/data/models/amount_model/amount_model.dart';
+import 'package:check_out_app/features/check_out/data/models/amount_model/details.dart';
+import 'package:check_out_app/features/check_out/data/models/orders_model/item.dart';
+import 'package:check_out_app/features/check_out/data/models/orders_model/orders_model.dart';
 import 'package:check_out_app/features/check_out/presentation/manager/payment_cubit/payment_cubit.dart';
 import 'package:check_out_app/features/check_out/presentation/views/thank_you_view.dart';
 import 'package:check_out_app/features/check_out/presentation/widget/custom_button.dart';
@@ -30,55 +34,8 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         //   SnackBar snackBar = SnackBar(content: Text(state.errMessage));
         //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // }
-
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => PaypalCheckoutView(
-            sandboxMode: true,
-            clientId: "",
-            secretKey: "",
-            transactions: const [
-              {
-                "amount": {
-                  "total": "70",
-                  "currency": "USD",
-                  "details": {
-                    "subtotal": "70",
-                    "shipping": "0",
-                    "shipping_discount": 0
-                  }
-                },
-                "description": "The payment transaction description.",
-                "item_list": {
-                  "items": [
-                    {
-                      "name": "Apple",
-                      "quantity": 4,
-                      "price": "5",
-                      "currency": "USD"
-                    },
-                    {
-                      "name": "Pineapple",
-                      "quantity": 5,
-                      "price": "10",
-                      "currency": "USD"
-                    }
-                  ]
-                }
-              }
-            ],
-            note: "Contact us for any questions on your order.",
-            onSuccess: (Map params) async {
-              print("onSuccess: $params");
-            },
-            onError: (error) {
-              print("onError: $error");
-              Navigator.pop(context);
-            },
-            onCancel: () {
-              print('cancelled:');
-            },
-          ),
-        ));
+        var tranactionData = getTransactionsData();
+        excutePayPalPayment(context, tranactionData);
       },
       builder: (context, state) {
         return CustomButton(
@@ -98,5 +55,58 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         );
       },
     );
+  }
+
+  void excutePayPalPayment(BuildContext context,
+      ({AmountModel amount, OrdersModel ordersList}) tranactionData) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => PaypalCheckoutView(
+        sandboxMode: true,
+        clientId: "",
+        secretKey: "",
+        transactions: [
+          {
+            "amount": tranactionData.amount.toJson(),
+            "description": "The payment transaction description.",
+            "item_list": tranactionData.ordersList.toJson(),
+          }
+        ],
+        note: "Contact us for any questions on your order.",
+        onSuccess: (Map params) async {
+          print("onSuccess: $params");
+        },
+        onError: (error) {
+          print("onError: $error");
+          Navigator.pop(context);
+        },
+        onCancel: () {
+          print('cancelled:');
+        },
+      ),
+    ));
+  }
+
+  ({AmountModel amount, OrdersModel ordersList}) getTransactionsData() {
+    var amountModel = AmountModel(
+      total: "70",
+      currency: "USD",
+      details: Details(shipping: "0", shippingDiscount: 0, subtotal: "70"),
+    );
+    List<Order> orders = [
+      Order(
+        name: "Apple",
+        currency: "USD",
+        quantity: 4,
+        price: "5",
+      ),
+      Order(
+        name: "Pineapple",
+        currency: "USD",
+        quantity: 5,
+        price: "10",
+      ),
+    ];
+    var ordersList = OrdersModel(orders: orders);
+    return (amount: amountModel, ordersList: ordersList);
   }
 }
